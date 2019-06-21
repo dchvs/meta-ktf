@@ -7,7 +7,7 @@ DEPENDS += " libnl gtest"
 
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRCREV = "02e29c41702ba04e12bcfea4b9349c4ef53eed56"
+SRCREV = "ca58342ebed698f246ede0b7022f240f9457b202"
 SRC_URI = "git://github.com/dchvs/ktf.git;branch=lethani;protocol=git"
 
 S = "${WORKDIR}/git"
