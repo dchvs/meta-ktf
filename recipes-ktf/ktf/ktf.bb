@@ -1,5 +1,5 @@
 DESCRIPTION = "Kernel Test Framework"
-HOMEPAGE = "https://github.com/dchvs/ktfx.git"
+HOMEPAGE = "https://github.com/dchvs/ktf.git"
 LICENSE = "GPLv2"
 
 PR = "r1"
@@ -7,16 +7,15 @@ DEPENDS += " libnl gtest"
 
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRCREV = "0f14f0ff11f83b3668ac733f44c73d1fd26b12e3"
-SRC_URI = "git://github.com/dchvs/ktfx.git;protocol=git"
+SRCREV = "02e29c41702ba04e12bcfea4b9349c4ef53eed56"
+SRC_URI = "git://github.com/dchvs/ktf.git;branch=lethani;protocol=git"
 
 S = "${WORKDIR}/git"
 
-
-# Makefile parameters 
+# Makefile parameters
 export KERNEL_SRC="${STAGING_KERNEL_BUILDDIR}"
-export ARCH="arm"
-export CROSS_COMPILE="arm-poky-linux-gnueabi-"
+export ARCH="${ARCH}"
+export CROSS_COMPILE="${CROSS_COMPILE}"
 
 
 inherit pkgconfig cmake
@@ -29,8 +28,8 @@ do_install() {
     cp -R ${WORKDIR}/git/kernel/*.h ${D}${includedir}/ktf
 
     #ktf.ko
-    install -d ${D}/lib/modules/4.19.30-yocto-standard/kernel/drivers/
-    install -m 0755 ${S}/kernel/ktf.ko ${D}/lib/modules/4.19.30-yocto-standard/kernel/drivers/
+#    install -d ${D}/lib/modules/4.19.30-yocto-standard/kernel/drivers/
+#    install -m 0755 ${S}/kernel/ktf.ko ${D}/lib/modules/4.19.30-yocto-standard/kernel/drivers/
 
     #lib/libktf.so
     install -d ${D}${libdir}
@@ -47,12 +46,10 @@ FILES_${PN} = " \
     ${includedir}/ktf \
     ${libdir}/libktf.so \
     ${bindir}/ktfrun \
-    /lib/modules/4.19.30-yocto-standard/kernel/drivers/ktf.ko \
 "
-FILES_${PN}-dev = " \
-"
-FILES_${PN}-staticdev = " \
-"
+#    /lib/modules/4.19.30-yocto-standard/kernel/drivers/ktf.ko
+FILES_${PN}-dev = " "
+FILES_${PN}-staticdev = " "
 
 PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-staticdev ${PN}-dev ${PN}-locale "
 
