@@ -41,7 +41,7 @@ do_install() {
     chrpath -d ${D}${bindir}/ktfrun
 
 
-    oe_runmake driver_install
+    oe_runmake modules_install
 }
 
 FILES_${PN} = " \
