@@ -17,6 +17,7 @@ export KERNEL_SRC="${STAGING_KERNEL_BUILDDIR}"
 export ARCH="${ARCH}"
 export CROSS_COMPILE="${CROSS_COMPILE}"
 
+EXTRA_OEMAKE = "driver_install"
 
 inherit pkgconfig module cmake
 
@@ -40,8 +41,6 @@ do_install() {
     cp -R ${WORKDIR}/build/user/ktfrun ${D}${bindir}
     chrpath -d ${D}${bindir}/ktfrun
 
-
-    oe_runmake modules_install
 }
 
 FILES_${PN} = " \
