@@ -18,7 +18,7 @@ export ARCH="${ARCH}"
 export CROSS_COMPILE="${CROSS_COMPILE}"
 
 
-inherit pkgconfig cmake
+inherit pkgconfig module cmake
 
 do_install() {
     ##KTF
