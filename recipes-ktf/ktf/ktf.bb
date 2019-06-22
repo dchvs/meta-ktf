@@ -17,7 +17,7 @@ export KERNEL_SRC="${STAGING_KERNEL_BUILDDIR}"
 export ARCH="${ARCH}"
 export CROSS_COMPILE="${CROSS_COMPILE}"
 
-EXTRA_OEMAKE = "driver_install"
+EXTRA_OEMAKE = "modules_install"
 
 inherit pkgconfig module cmake
 
