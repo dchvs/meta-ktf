@@ -40,6 +40,8 @@ do_install() {
     cp -R ${WORKDIR}/build/user/ktfrun ${D}${bindir}
     chrpath -d ${D}${bindir}/ktfrun
 
+
+    oe_runmake driver_install
 }
 
 FILES_${PN} = " \
