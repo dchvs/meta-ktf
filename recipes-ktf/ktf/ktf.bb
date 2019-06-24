@@ -34,7 +34,7 @@ do_install() {
 
     #lib/libktf.so
     install -d ${D}${libdir}
-    cp -R ${WORKDIR}/build/shared/libk*.so* ${D}${libdir}
+    cp -R ${WORKDIR}/build/lib/libk*.so* ${D}${libdir}
 
     # bin/ktfrun
     install -d ${D}${bindir}
