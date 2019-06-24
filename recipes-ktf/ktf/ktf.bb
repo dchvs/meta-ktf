@@ -19,8 +19,8 @@ export CROSS_COMPILE="${CROSS_COMPILE}"
 
 EXTRA_OEMAKE = "modules_install"
 
-inherit pkgconfig module cmake
-
+inherit pkgconfig cmake
+#module
 do_install() {
     ##KTF
 
