@@ -1,54 +1,34 @@
 DESCRIPTION = "Kernel Test Framework"
-HOMEPAGE = "https://github.com/dchvs/ktf.git"
+HOMEPAGE = "https://github.com/oracle/ktf"
 LICENSE = "GPLv2"
-
-PR = "r1"
-DEPENDS += " libnl gtest"
 
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRCREV = "ca58342ebed698f246ede0b7022f240f9457b202"
-SRC_URI = "git://github.com/dchvs/ktf.git;branch=lethani;protocol=git"
+BRANCH ?= "lethani"
+
+SRCREV = "60b60de3854d72cab1951007e9d01ba32ff2a70a"
+SRC_URI = "git://git@github.com/dchvs/ktf.git;protocol=ssh;branch=${BRANCH} "
 
 S = "${WORKDIR}/git"
 
+
 # Makefile parameters
-export KERNEL_SRC="${STAGING_KERNEL_BUILDDIR}"
-export ARCH="${ARCH}"
-export CROSS_COMPILE="${CROSS_COMPILE}"
+export KERNEL_SRC = "${STAGING_KERNEL_BUILDDIR}"
 
-EXTRA_OEMAKE = "modules_install"
+# CMakeLists parameters
+EXTRA_OECMAKE += "-DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION}"
 
-inherit pkgconfig cmake
-#module
-do_install() {
-    ##KTF
 
-    # include
-    install -d ${D}${includedir}/ktf
-    cp -R ${WORKDIR}/git/kernel/*.h ${D}${includedir}/ktf
+inherit pkgconfig module-base kernel-module-split cmake
 
-    #ktf.ko
-#    install -d ${D}/lib/modules/4.19.30-yocto-standard/kernel/drivers/
-#    install -m 0755 ${S}/kernel/ktf.ko ${D}/lib/modules/4.19.30-yocto-standard/kernel/drivers/
-
-    #lib/libktf.so
-    install -d ${D}${libdir}
-    cp -R ${WORKDIR}/build/lib/libk*.so* ${D}${libdir}
-
-    # bin/ktfrun
-    install -d ${D}${bindir}
-    cp -R ${WORKDIR}/build/user/ktfrun ${D}${bindir}
-    chrpath -d ${D}${bindir}/ktfrun
-
-}
 
 FILES_${PN} = " \
     ${includedir}/ktf \
     ${libdir}/libktf.so \
     ${bindir}/ktfrun \
+    /lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf.ko \
 "
-#    /lib/modules/4.19.30-yocto-standard/kernel/drivers/ktf.ko
+
 FILES_${PN}-dev = " "
 FILES_${PN}-staticdev = " "
 
@@ -57,5 +37,5 @@ PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-staticdev ${PN}-dev ${PN}-locale "
 INSANE_SKIP_${PN} = "dev-deps"
 
 #Dependencies
-DEPENDS_${PN} = " libnl libnl-genl libktf libgmock libgtest libnl-3 libnl-genl-3"
+DEPENDS += " libnl gtest"
 RDEPENDS_${PN} = " python libnl libnl-genl gtest "
