@@ -38,4 +38,4 @@ INSANE_SKIP_${PN} = "dev-deps"
 
 #Dependencies
 DEPENDS += " libnl gtest"
-RDEPENDS_${PN} = " python libnl libnl-genl gtest "
+RDEPENDS_${PN} = " python3 libnl gtest "

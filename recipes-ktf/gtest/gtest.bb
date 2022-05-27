@@ -34,5 +34,5 @@ PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-staticdev ${PN}-dev ${PN}-locale"
 INSANE_SKIP_${PN} = " dev-deps"
 
 #Dependencies
-DEPENDS_${PN} = " libnl libnl-genl lpthread"
-RDEPENDS_${PN} = " libnl python "
+DEPENDS_${PN} = " libnl"
+RDEPENDS_${PN} = " python3  libnl"
