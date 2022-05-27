@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425
 
 BRANCH ?= "lethani"
 
-SRCREV = "60b60de3854d72cab1951007e9d01ba32ff2a70a"
-SRC_URI = "git://git@github.com/dchvs1/ktf.git;protocol=ssh;branch=${BRANCH} "
+SRC_URI = "git://git@github.com/dchvs1/ktf.git;protocol=ssh;branch=${BRANCH};rev=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
