@@ -10,16 +10,13 @@ SRC_URI = "git://git@github.com/dchvs1/ktf.git;protocol=ssh;branch=${BRANCH};rev
 
 S = "${WORKDIR}/git"
 
-
 # Makefile parameters
 export KERNEL_SRC = "${STAGING_KERNEL_BUILDDIR}"
 
 # CMakeLists parameters
 EXTRA_OECMAKE += "-DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION}"
 
-
 inherit pkgconfig module-base kernel-module-split cmake
-
 
 FILES_${PN} = " \
     ${includedir}/ktf \
