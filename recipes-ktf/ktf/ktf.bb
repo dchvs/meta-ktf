@@ -34,4 +34,4 @@ do_install () {
 
 #Dependencies
 DEPENDS += " libnl gtest"
-RDEPENDS_${PN} = " python3 libnl gtest "
+RDEPENDS_${PN} = " python3 libnl gtest"
