@@ -25,12 +25,12 @@ FILES_${PN} = " \
     /lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf.ko \
 "
 
-FILES_${PN}-dev = " "
-FILES_${PN}-staticdev = " "
+FILES_${PN}-dev = " ${includedir}/*.h"
 
-PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-staticdev ${PN}-dev ${PN}-locale "
-
-INSANE_SKIP_${PN} = "dev-deps"
+do_install () {
+    install -d ${D}${includedir}
+    install -m 0644 ${S}/kernel/*.h ${D}${includedir}
+}
 
 #Dependencies
 DEPENDS += " libnl gtest"
