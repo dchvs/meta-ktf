@@ -18,20 +18,38 @@ EXTRA_OECMAKE += "-DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION}"
 
 inherit pkgconfig module-base kernel-module-split cmake
 
+do_install_append () {
+    # User installs
+    install -d ${D}${includedir}/ktf
+    install -m 0644 ${S}/lib/*.h ${D}${includedir}/ktf
+
+    # Kernel installs
+    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/
+    install -m 0644 ${S}/kernel/ktf.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/
+
+    install -d ${D}/usr/src/${PN}/include/*.h
+    install -m 0644 ${S}/kernel/*.h ${D}/usr/src/${PN}/include
+}
+
 FILES_${PN} = " \
-    ${includedir}/ktf \
     ${libdir}/libktf.so \
     ${bindir}/ktfrun \
+"
+
+FILES_${PN}-kernel = " \
     /lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf.ko \
 "
 
-FILES_${PN}-dev = " ${includedir}/*.h"
+FILES_${PN}-dev = " \
+    ${includedir}/ktf/*.h \
+"
 
-do_install () {
-    install -d ${D}${includedir}
-    install -m 0644 ${S}/kernel/*.h ${D}${includedir}
-}
+FILES_${PN}-kernel-dev = " \
+    /usr/src/${PN}/include/*.h \
+"
+
+PACKAGES += " ${PN}-kernel ${PN}-kernel-dev"
 
 #Dependencies
-DEPENDS += " libnl gtest"
-RDEPENDS_${PN} = " python3 libnl gtest"
+DEPENDS = " libnl gtest"
+RDEPENDS_${PN} = " python3 libnl gtest ${PN}-kernel"
