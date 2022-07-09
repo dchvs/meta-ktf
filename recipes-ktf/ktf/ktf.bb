@@ -4,30 +4,31 @@ LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-BRANCH ?= "lethani"
+BRANCH ?= "feature/build-ktf-out-of-tree"
 
 SRC_URI = "git://git@github.com/dchvs1/ktf.git;protocol=ssh;branch=${BRANCH};rev=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
-# Makefile parameters
-export KERNEL_SRC = "${STAGING_KERNEL_BUILDDIR}"
+do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
-# CMakeLists parameters
-EXTRA_OECMAKE += "-DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION}"
+# Makefile parameters
+export KERNEL_SRC = "${STAGING_KERNEL_DIR}/"
 
 inherit pkgconfig module-base kernel-module-split cmake
 
+EXTRA_OECMAKE_append = " -DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION} -DKERNEL_SRC=${KERNEL_SRC} -DARCH=${ARCH}"
+
 do_install_append () {
-    # User installs
+    # User Space installs
     install -d ${D}${includedir}/ktf
     install -m 0644 ${S}/lib/*.h ${D}${includedir}/ktf
 
-    # Kernel installs
+    # Kernel Space installs
     install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/
-    install -m 0644 ${S}/kernel/ktf.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/
+    install -m 0644 ${B}/kernel/ktf.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/
 
-    install -d ${D}/usr/src/${PN}/include/*.h
+    install -d ${D}/usr/src/${PN}/include/
     install -m 0644 ${S}/kernel/*.h ${D}/usr/src/${PN}/include
 }
 
@@ -51,5 +52,5 @@ FILES_${PN}-kernel-dev = " \
 PACKAGES += " ${PN}-kernel ${PN}-kernel-dev"
 
 #Dependencies
-DEPENDS = " libnl gtest"
+DEPENDS = " virtual/kernel kernel-devsrc bison-native elfutils-native bc-native libnl gtest"
 RDEPENDS_${PN} = " python3 libnl gtest ${PN}-kernel"
