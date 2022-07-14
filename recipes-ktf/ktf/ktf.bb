@@ -25,8 +25,8 @@ do_install_append () {
     install -m 0644 ${S}/lib/*.h ${D}${includedir}/ktf
 
     # Kernel Space installs
-    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/
-    install -m 0644 ${B}/kernel/ktf.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/
+    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf/
+    install -m 0644 ${B}/kernel/ktf.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf/
 
     install -d ${D}/usr/src/${PN}/include/
     install -m 0644 ${S}/kernel/*.h ${D}/usr/src/${PN}/include
@@ -38,7 +38,7 @@ FILES_${PN} = " \
 "
 
 FILES_${PN}-kernel = " \
-    /lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf.ko \
+    /lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf/ktf.ko \
 "
 
 FILES_${PN}-dev = " \
