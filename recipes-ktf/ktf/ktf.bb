@@ -13,7 +13,7 @@ S = "${WORKDIR}/git"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 # Makefile parameters
-export KERNEL_SRC = "${STAGING_KERNEL_DIR}/"
+KERNEL_SRC = "${STAGING_KERNEL_DIR}/"
 
 inherit pkgconfig module-base kernel-module-split cmake
 
