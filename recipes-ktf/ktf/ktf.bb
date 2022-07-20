@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425
 
 BRANCH ?= "v4.19/standard/base"
 
-SRC_URI = "git://git@github.com/dchvs1/ktf.git;protocol=ssh;branch=${BRANCH};rev=${BRANCH}"
+SRC_URI = "git://git@github.com/dchvs/ktf.git;protocol=ssh;branch=${BRANCH};rev=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
