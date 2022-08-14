@@ -5,8 +5,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
 BRANCH ?= "v4.19/standard/base"
+SRCREV = "9b26d4f155f8c9869a8c8f2291592814a17d5f76"
 
-SRC_URI = "git://git@github.com/dchvs/ktf.git;protocol=https;branch=${BRANCH};rev=${BRANCH}"
+SRC_URI = "git://git@github.com/dchvs/ktf.git;protocol=https;branch=${BRANCH};"
 
 S = "${WORKDIR}/git"
 
