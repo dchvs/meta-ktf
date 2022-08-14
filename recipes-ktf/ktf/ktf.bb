@@ -17,7 +17,7 @@ KERNEL_SRC = "${STAGING_KERNEL_DIR}/"
 
 inherit pkgconfig module-base kernel-module-split cmake
 
-EXTRA_OECMAKE_append = " -DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION} -DKERNEL_SRC=${KERNEL_SRC} -DARCH=${ARCH}"
+EXTRA_OECMAKE += " -DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION} -DKERNEL_SRC=${KERNEL_SRC} -DARCH=${ARCH}"
 
 do_install_append () {
     # User Space installs
