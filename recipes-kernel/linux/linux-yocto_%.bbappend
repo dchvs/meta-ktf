@@ -1,6 +1,6 @@
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files/fragments:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files/fragments:"
 
-SRC_URI += "\
+SRC_URI:append = "\
     file://ktf_fragments.scc \
 "
