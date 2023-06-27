@@ -18,9 +18,9 @@ KERNEL_SRC = "${STAGING_KERNEL_DIR}/"
 
 inherit pkgconfig module-base kernel-module-split cmake
 
-EXTRA_OECMAKE += " -DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION} -DKERNEL_SRC=${KERNEL_SRC} -DARCH=${ARCH}"
+EXTRA_OECMAKE:append = " -DCMAKE_SYSTEM_VERSION=${KERNEL_VERSION} -DKERNEL_SRC=${KERNEL_SRC} -DARCH=${ARCH}"
 
-do_install_append () {
+do_install:append () {
     # User Space installs
     install -d ${D}${includedir}/ktf
     install -m 0644 ${S}/lib/*.h ${D}${includedir}/ktf
@@ -33,25 +33,25 @@ do_install_append () {
     install -m 0644 ${S}/kernel/*.h ${D}/usr/src/${PN}/include
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${libdir}/libktf.so \
     ${bindir}/ktfrun \
 "
 
-FILES_${PN}-kernel = " \
+FILES:${PN}-kernel = " \
     /lib/modules/${KERNEL_VERSION}/kernel/drivers/ktf/ktf.ko \
 "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     ${includedir}/ktf/*.h \
 "
 
-FILES_${PN}-kernel-dev = " \
+FILES:${PN}-kernel-dev = " \
     /usr/src/${PN}/include/*.h \
 "
 
-PACKAGES += " ${PN}-kernel ${PN}-kernel-dev"
+PACKAGES:append = " ${PN}-kernel ${PN}-kernel-dev"
 
-#Dependencies
-DEPENDS = " virtual/kernel kernel-devsrc bison-native elfutils-native bc-native libnl gtest"
-RDEPENDS_${PN} = " python3 libnl gtest ${PN}-kernel"
+# Dependencies
+DEPENDS = "virtual/kernel kernel-devsrc bison-native elfutils-native bc-native libnl gtest"
+RDEPENDS:${PN} = "python3 libnl gtest ${PN}-kernel"
