@@ -2,8 +2,7 @@ DESCRIPTION = "Google C++ Testing Framework"
 HOMEPAGE = "https://github.com/google/googletest"
 LICENSE = "BSD-3-Clause"
 
-BB_STRICT_CHECKSUM = "0"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=550794465ba0ec5312d6919e203a55f9"
 
 BRANCH = "main"
 SRCREV = "7f1c0f6f8122d7978c9de29d9d468f7fac9ba62c"
