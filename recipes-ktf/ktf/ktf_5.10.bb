@@ -4,8 +4,8 @@ LICENSE = "GPL-2.0-or-later"
 
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fed54355545ffd980b814dab4a3b312c"
 
-BRANCH ?= "v5.4/standard/base"
-SRCREV = "7a2f77b9a34bbf9c0b0af5975d77d3f7b65e754d"
+BRANCH ?= "v5.10/standard/base"
+SRCREV = "b5da5c8a871727c722e7a752979471d45fbe56bb"
 
 SRC_URI = "git://git@github.com/dchvs/ktf.git;protocol=https;branch=${BRANCH};"
 
