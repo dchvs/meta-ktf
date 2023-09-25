@@ -66,12 +66,12 @@ DEPENDS = " \
     bison-native \
     elfutils-native \
     bc-native \
+    googletest \
     libnl \
-    gtest \
 "
 
 RDEPENDS:${PN} = " \
+    googletest \
     libnl \
-    gtest \
     ${PN}-kernel\
 "
