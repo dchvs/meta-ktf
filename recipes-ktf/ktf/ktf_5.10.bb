@@ -5,13 +5,18 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fed54355545ffd980b814dab4a3b312c"
 
 BRANCH ?= "v5.10/standard/base"
-SRCREV = "b5da5c8a871727c722e7a752979471d45fbe56bb"
+SRCREV = "0f9c333c58fdb10504a752eaced70d90cd7a3bbd"
 
 SRC_URI = "git://git@github.com/dchvs/ktf.git;protocol=https;branch=${BRANCH};"
 
 S = "${WORKDIR}/git"
 
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
+
+python () {
+    if d.getVar('PV').strip() != '.'.join(d.getVar('KERNEL_VERSION').split('.')[:2]).strip():
+        raise bb.parse.SkipPackage("Skipping recipe; incompatible Kernel version")
+}
 
 # Makefile parameters
 KERNEL_SRC = "${STAGING_KERNEL_DIR}/"
@@ -53,5 +58,5 @@ FILES:${PN}-kernel-dev = " \
 PACKAGES:append = " ${PN}-kernel ${PN}-kernel-dev"
 
 # Dependencies
-DEPENDS = "virtual/kernel kernel-devsrc bison-native elfutils-native bc-native libnl gtest"
-RDEPENDS:${PN} = "python3 libnl gtest ${PN}-kernel"
+DEPENDS = "virtual/kernel kernel-devsrc bison-native elfutils-native bc-native libnl googletest"
+RDEPENDS:${PN} = "python3 libnl googletest ${PN}-kernel"
